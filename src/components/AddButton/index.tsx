@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import styles from './styles.module.css';
+import { Button } from 'react-bootstrap';
+import styles from './styles.module.scss';
 
 const AddButton = () => {
   const [count, setCount] = useState(0);
@@ -31,12 +32,19 @@ const AddButton = () => {
 
   return (
     <div className={styles.container}>
-      <p> {getTime()} </p>
+      <div className={styles.time}>
+        <span> {getTime()} </span>
+      </div>
+
       <div>
-        <button onClick={() => setIsActivate(!isActivate)}>
+        <Button variant="primary" onClick={() => setIsActivate(!isActivate)}>
           {isActivate ? 'Pausar' : 'Iniciar'}
-        </button>
-        {count > 0 && <button onClick={reset}>Resetar</button>}
+        </Button>
+        {count > 0 && !isActivate && (
+          <Button variant="sencodary" onClick={reset}>
+            Resetar
+          </Button>
+        )}
       </div>
     </div>
   );
