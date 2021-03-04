@@ -1,0 +1,27 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+@mixin mx_flex {
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+}
+
+@mixin mx_flex_center {
+  @include mx_flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin mx_flex_center_column {
+  @include mx_flex_center;
+  flex-direction: column;
+}
+
+@mixin mx_use_select {
+  -webkit-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
