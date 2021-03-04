@@ -1,7 +1,21 @@
+import AddButton from '../AddButton';
 import styles from './styles.module.css';
 
-const ViewComponent = () => {
-  return <div className={styles.center}>Hello</div>;
+type Props = {
+  name: string;
+};
+
+const ViewComponent = ({ name }: Props) => {
+  return (
+    <div className={styles.center}>
+      <div>
+        <span>Hello {name}</span>
+      </div>
+      <div>
+        <AddButton />
+      </div>
+    </div>
+  );
 };
 
 export default ViewComponent;
