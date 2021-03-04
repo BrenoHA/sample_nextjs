@@ -1,0 +1,14 @@
+@import '../../styles/mixins';
+
+.container {
+  @include mx_flex_center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.time {
+  margin: 20px 0px;
+}

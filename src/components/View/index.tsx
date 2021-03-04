@@ -1,5 +1,6 @@
 import AddButton from '../AddButton';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
+import { Card } from 'react-bootstrap';
 
 type Props = {
   name: string;
@@ -8,12 +9,16 @@ type Props = {
 const ViewComponent = ({ name }: Props) => {
   return (
     <div className={styles.center}>
-      <div>
-        <span>Hello {name}</span>
-      </div>
-      <div>
-        <AddButton />
-      </div>
+      <Card>
+        <Card.Body>
+          {/* <div> */}
+          <span>Hello {name}</span>
+          {/* </div>; */}
+          {/* <div> */}
+          <AddButton />
+          {/* </div> */}
+        </Card.Body>
+      </Card>
     </div>
   );
 };

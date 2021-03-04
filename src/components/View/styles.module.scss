@@ -1,0 +1,6 @@
+@import '../../styles/mixins';
+
+.center {
+  height: 100vh;
+  @include mx_flex_center_column;
+}
