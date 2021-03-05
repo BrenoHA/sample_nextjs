@@ -1,22 +1,41 @@
+import { useEffect, useState } from 'react';
 import AddButton from '../AddButton';
 import styles from './styles.module.scss';
 import { Card } from 'react-bootstrap';
+import InputComponent from '../Input';
+import { IUser } from '@app/interfaces/user';
 
-type Props = {
-  name: string;
-};
+const ViewComponent = () => {
+  const [username, setUsername] = useState<string>('');
+  const [user, setUser] = useState<IUser>({ name: '' });
 
-const ViewComponent = ({ name }: Props) => {
+  useEffect(() => {
+    if (username != '') {
+      const getUser = async () => {
+        const res = await fetch(`https://api.github.com/users/${username}`);
+        const user: IUser = await res.json();
+
+        if (user) {
+          setUser(user);
+        }
+      };
+
+      getUser();
+    }
+  }, [username]);
+
   return (
     <div className={styles.center}>
       <Card>
-        <Card.Body>
-          {/* <div> */}
-          <span>Hello {name}</span>
-          {/* </div>; */}
-          {/* <div> */}
+        <InputComponent setUsername={setUsername} />
+
+        <Card.Body className={styles.name}>
+          {user.name && (
+            <span>
+              Hello <strong>{user.name}</strong> 😃
+            </span>
+          )}
           <AddButton />
-          {/* </div> */}
         </Card.Body>
       </Card>
     </div>

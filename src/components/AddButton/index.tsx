@@ -32,6 +32,7 @@ const AddButton = () => {
 
   return (
     <div className={styles.container}>
+      <span className={styles.temporizador}>Temporizador</span>
       <div className={styles.time}>
         <span> {getTime()} </span>
       </div>

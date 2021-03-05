@@ -4,3 +4,7 @@
   height: 100vh;
   @include mx_flex_center_column;
 }
+
+.name {
+  @include mx_flex_center_column;
+}
