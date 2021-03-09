@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import styles from './styles.module.scss';
 
-const AddButton = () => {
+const CounterComponent = () => {
   const [count, setCount] = useState(0);
   const [isActivate, setIsActivate] = useState(false);
 
@@ -51,4 +51,4 @@ const AddButton = () => {
   );
 };
 
-export default AddButton;
+export default CounterComponent;

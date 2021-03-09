@@ -1,0 +1,10 @@
+@import '../../styles/mixins';
+
+.info {
+  @include mx_flex_center_column;
+}
+
+.info img {
+  height: 70px;
+  border-radius: 50px;
+}

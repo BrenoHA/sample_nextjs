@@ -1,36 +1,24 @@
 import styles from './styles.module.scss';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
-import { SyntheticEvent, ChangeEvent, useState } from 'react';
+import React, { SyntheticEvent, ChangeEvent, useState } from 'react';
 
 type Props = {
-  setUsername: (name: string) => void;
-  avatar_url: string;
+  setIsCounter: (isCounter: boolean) => void;
 };
 
-const InputComponent = ({ setUsername, avatar_url }: Props) => {
-  const [name, setName] = useState<string>('');
-  const [hasProfilePic, setHasProfilePic] = useState(false);
-
+const InputComponent = ({ setIsCounter }: Props) => {
   const handleSubmit = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    setUsername(name);
-    setHasProfilePic(true);
+    setIsCounter(true);
   };
 
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
-    setName(ev.target.value);
   };
-
-  console.log(avatar_url); //Undefined
 
   return (
     <div className={styles.container}>
-      {hasProfilePic ? (
-        <img src={avatar_url} alt="profile" />
-      ) : (
-        <img src="github.png" alt="github-logo" />
-      )}
+      <img src="github.png" alt="github-logo" />
       <span className={styles.label}>Digite seu usuário do GitHub</span>
 
       <form onSubmit={handleSubmit} className={styles.container}>

@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import AddButton from '../AddButton';
 import styles from './styles.module.scss';
 import { Card } from 'react-bootstrap';
 import InputComponent from '../Input';
 import { IUser } from '@app/interfaces/user';
 
-const ViewComponent = () => {
+type Props = {
+  setIsCounter: (isCounter: boolean) => void;
+};
+
+const CardInputComponent = ({ setIsCounter }: Props) => {
   const [username, setUsername] = useState<string>('');
   const [user, setUser] = useState<IUser>({ name: '', avatar_url: '' });
 
@@ -26,23 +29,11 @@ const ViewComponent = () => {
 
   return (
     <div className={styles.center}>
-      <Card>
-        <InputComponent
-          setUsername={setUsername}
-          avatar_url={user.avatar_url}
-        />
-
-        <Card.Body className={styles.name}>
-          {user.name && (
-            <span>
-              Hello <strong>{user.name}</strong> 😃
-            </span>
-          )}
-          <AddButton />
-        </Card.Body>
+      <Card style={{ width: '20rem' }}>
+        <InputComponent setIsCounter={setIsCounter} />
       </Card>
     </div>
   );
 };
 
-export default ViewComponent;
+export default CardInputComponent;

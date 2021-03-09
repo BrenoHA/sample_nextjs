@@ -1,9 +1,17 @@
-import ViewComponent from '@app/components/View';
+import CardCounterComponent from '@app/components/CardCounter';
+import CardInput from '@app/components/CardInput';
+import { useState } from 'react';
 
 const HomePage = () => {
+  const [isCounter, setIsCounter] = useState<boolean>(false);
+
   return (
     <div>
-      <ViewComponent />;
+      {isCounter ? (
+        <CardCounterComponent setIsCounter={setIsCounter} />
+      ) : (
+        <CardInput setIsCounter={setIsCounter} />
+      )}
     </div>
   );
 };
