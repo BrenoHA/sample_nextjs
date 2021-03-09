@@ -7,7 +7,7 @@ import { IUser } from '@app/interfaces/user';
 
 const ViewComponent = () => {
   const [username, setUsername] = useState<string>('');
-  const [user, setUser] = useState<IUser>({ name: '' });
+  const [user, setUser] = useState<IUser>({ name: '', avatar_url: '' });
 
   useEffect(() => {
     if (username != '') {
@@ -27,7 +27,10 @@ const ViewComponent = () => {
   return (
     <div className={styles.center}>
       <Card>
-        <InputComponent setUsername={setUsername} />
+        <InputComponent
+          setUsername={setUsername}
+          avatar_url={user.avatar_url}
+        />
 
         <Card.Body className={styles.name}>
           {user.name && (
