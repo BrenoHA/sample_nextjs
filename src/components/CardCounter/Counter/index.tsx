@@ -32,7 +32,7 @@ const CounterComponent = () => {
 
   return (
     <div className={styles.container}>
-      <span className={styles.temporizador}>Temporizador</span>
+      <span className={styles.contador}>Cronômetro</span>
       <div className={styles.time}>
         <span> {getTime()} </span>
       </div>

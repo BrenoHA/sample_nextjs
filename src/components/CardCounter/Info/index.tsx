@@ -1,15 +1,15 @@
 import styles from './styles.module.scss';
 
-type InputProps = {
+type Props = {
   name: string;
   avatar_url: string;
 };
 
-const InfoComponent = ({ name, avatar_url }: InputProps) => {
+const InfoComponent = ({ name, avatar_url }: Props) => {
   return (
     <div className={styles.info}>
       <img src={avatar_url} alt="Foto Perfil" />
-      <span>
+      <span className={styles.name}>
         Hello <strong>{name}</strong>
       </span>
     </div>

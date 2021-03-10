@@ -4,16 +4,21 @@ import React, { SyntheticEvent, ChangeEvent, useState } from 'react';
 
 type Props = {
   setIsCounter: (isCounter: boolean) => void;
+  setUsername: (username: string) => void;
 };
 
-const InputComponent = ({ setIsCounter }: Props) => {
+const InputComponent = ({ setIsCounter, setUsername }: Props) => {
+  const [tempUsername, setTempUsername] = useState<string>('');
+
   const handleSubmit = (ev: SyntheticEvent) => {
     ev.preventDefault();
     setIsCounter(true);
+    setUsername(tempUsername);
   };
 
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
+    setTempUsername(ev.target.value);
   };
 
   return (

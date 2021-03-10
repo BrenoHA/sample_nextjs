@@ -1,11 +1,7 @@
-@import '../../styles/mixins';
+@import '@app/styles/mixins';
 
 .center {
   height: 80vh;
-  @include mx_flex_center_column;
-}
-
-.name {
   @include mx_flex_center_column;
 }
 

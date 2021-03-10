@@ -1,35 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.scss';
-import CounterComponent from '../Counter';
+import CounterComponent from './Counter';
 import { Card } from 'react-bootstrap';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import { IUser } from '@app/interfaces/user';
-import InfoComponent from '../Info';
+import InfoComponent from './Info';
 
 type Props = {
   setIsCounter: (isCounter: boolean) => void;
+  user: IUser;
 };
 
-const CardCounterComponent = ({ setIsCounter }: Props) => {
-  const [username, setUsername] = useState<string>('');
-  const [user, setUser] = useState<IUser>({ name: '', avatar_url: '' });
-
-  useEffect(() => {
-    if (username != '') {
-      const getUser = async () => {
-        const res = await fetch(`https://api.github.com/users/${username}`);
-        const user: IUser = await res.json();
-
-        if (user) {
-          setUser(user);
-        }
-      };
-
-      getUser();
-    }
-  }, [username]);
+const CardCounterComponent = ({ setIsCounter, user }: Props) => {
+  console.log(user);
 
   return (
     <div className={styles.center}>
@@ -40,10 +25,7 @@ const CardCounterComponent = ({ setIsCounter }: Props) => {
           onClick={() => setIsCounter(false)}
         />
         <Card.Body>
-          <InfoComponent
-            name={username}
-            avatar_url={'https://avatars.githubusercontent.com/u/45776777?v=4'}
-          />
+          <InfoComponent name={user.name} avatar_url={user.avatar_url} />
           <CounterComponent />
         </Card.Body>
       </Card>
