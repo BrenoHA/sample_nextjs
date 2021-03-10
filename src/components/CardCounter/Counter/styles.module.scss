@@ -1,4 +1,4 @@
-@import '../../styles/mixins';
+@import '@app/styles/mixins';
 
 .container {
   @include mx_flex_center;
@@ -9,7 +9,7 @@
   flex-direction: column;
 }
 
-.temporizador {
+.contador {
   padding-top: 10px;
   font-size: 2rem;
 }
