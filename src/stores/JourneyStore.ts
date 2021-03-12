@@ -14,10 +14,12 @@ export class JourneyStoreClass {
     });
   }
 
-  addJourney(name: string) {
+  addJourney(type: string, startTime: string, endTime: string) {
     const item: IJourney = {
       id: +Math.random().toFixed(4),
-      name,
+      type,
+      startTime,
+      endTime,
       completed: false,
     };
     this.journeys.push(item);

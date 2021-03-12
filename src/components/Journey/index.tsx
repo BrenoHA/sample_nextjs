@@ -1,7 +1,7 @@
 import { SyntheticEvent, ChangeEvent, useState } from 'react';
-import { Button, Modal, Row, Col, Form } from 'react-bootstrap';
+import { Button, Modal, Row, Col, Form, Card } from 'react-bootstrap';
 import styles from './styles.module.scss';
-import { JourneyStoreClass } from './JourneyStore';
+import { JourneyStoreClass } from '@app/stores/JourneyStore';
 import { observer } from 'mobx-react';
 
 type JourneyListProps = {
@@ -9,7 +9,9 @@ type JourneyListProps = {
 };
 
 const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
-  const [value, setValue] = useState('');
+  const [type, setType] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
@@ -19,53 +21,63 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
 
   const handleSubmit = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    if (value) {
-      journeyStore.addJourney(value);
-      setValue('');
+    if (startTime) {
+      journeyStore.addJourney(type, startTime, endTime);
+      setStartTime('');
     }
-    console.log(value);
   };
 
-  const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
+  const handleStartTimeChange = (ev: ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
-    setValue(ev.target.value);
+    setStartTime(ev.target.value);
+  };
+  const handleTypeChange = (ev: ChangeEvent<HTMLInputElement>) => {
+    ev.preventDefault();
+    setType(ev.target.value);
+  };
+  const handleEndTimeChange = (ev: ChangeEvent<HTMLInputElement>) => {
+    ev.preventDefault();
+    setEndTime(ev.target.value);
   };
 
   return (
     <>
       <div className={styles.center}>
-        <div>
-          <div className="d-flex flex-column mb-3">
-            <span>Adicione uma jornada</span>
-            <Button
-              onClick={handleShow}
-              variant="outline-primary"
-              className="mt-2"
-            >
-              Adicionar
-            </Button>
-          </div>
+        <div className={styles.container}>
+          <span>Adicione uma jornada</span>
+          <Button
+            onClick={handleShow}
+            variant="outline-primary"
+            className="mt-2"
+          >
+            Adicionar
+          </Button>
 
-          <div className="d-flex justify-content-start flex-column mt-2 ">
-            <span>Feitos: {status.completed} </span>
-            <span> Remanecentes: {status.remaining}</span>
-          </div>
+          <span>Feitos: {status.completed} </span>
+          <span> Remanecentes: {status.remaining}</span>
+        </div>
 
-          <div className="d-flex justify-content-start mt-4">
-            <ul>
-              {journeyStore.journeys.map((journey, index) => {
-                return (
-                  <li
-                    onClick={() => {
-                      journeyStore.setCompleted(journey.id);
-                    }}
-                    key={index}
-                  >
-                    [ {journey.completed ? 'x' : '\xa0\xa0'} ]{journey.name}
-                  </li>
-                );
-              })}
-            </ul>
+        <div className="d-flex justify-content-start mt-4 ">
+          <div>
+            {journeyStore.journeys.map((journey, index) => {
+              return (
+                <Card
+                  className="my-2"
+                  border="secondary"
+                  style={{ width: '18rem' }}
+                  key={index}
+                >
+                  <Card.Header>{journey.type}</Card.Header>
+                  <Card.Body>
+                    <Card.Text>
+                      Início: {journey.startTime}
+                      <br />
+                      Fim: {journey.endTime}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -79,7 +91,11 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
             <Row>
               <Col>
                 <Form.Label>Tipo</Form.Label>
-                <Form.Control as="select" aria-label="tipo">
+                <Form.Control
+                  as="select"
+                  aria-label="tipo"
+                  onChange={handleTypeChange}
+                >
                   <option>-</option>
                   <option>Descanso</option>
                   <option>Espera</option>
@@ -93,14 +109,18 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
                 <Form.Label>Início</Form.Label>
                 <Form.Control
                   type="datetime-local"
-                  aria-label="inicio"
-                  value={value}
-                  onChange={handleChange}
+                  aria-label="StartTime"
+                  value={startTime}
+                  onChange={handleStartTimeChange}
                 />
               </Col>
               <Col>
                 <Form.Label>Fim</Form.Label>
-                <Form.Control type="datetime-local" aria-label="Tarefa" />
+                <Form.Control
+                  type="datetime-local"
+                  aria-label="EndTime"
+                  onChange={handleEndTimeChange}
+                />
               </Col>
             </Row>
           </Modal.Body>

@@ -1,10 +1,10 @@
 @import '@app/styles/mixins';
 
 .center {
-  height: 80vh;
   @include mx_flex_center_column;
 }
 
 .container {
+  margin-top: 200px;
   @include mx_flex_center_column;
 }
