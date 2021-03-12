@@ -1,5 +1,5 @@
 import { SyntheticEvent, ChangeEvent, useState } from 'react';
-import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Button, Modal, Row, Col, Form } from 'react-bootstrap';
 import styles from './styles.module.scss';
 import { JourneyStoreClass } from './JourneyStore';
 import { observer } from 'mobx-react';
@@ -10,6 +10,10 @@ type JourneyListProps = {
 
 const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
   const [value, setValue] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
 
   const status = journeyStore.status;
 
@@ -28,49 +32,89 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
   };
 
   return (
-    <div className={styles.center}>
-      <div>
-        <span>Digite uma jornada</span>
-        <form onSubmit={handleSubmit} className="d-flex flex-row mt-2">
-          <FormControl
-            type="datetime-local"
-            placeholder=""
-            aria-label="Tarefa"
-            aria-describedby="basic-addon1"
-            value={value}
-            onChange={handleChange}
-            className="mr-2"
-          />
+    <>
+      <div className={styles.center}>
+        <div>
+          <div className="d-flex flex-column mb-3">
+            <span>Adicione uma jornada</span>
+            <Button
+              onClick={handleShow}
+              variant="outline-primary"
+              className="mt-2"
+            >
+              Adicionar
+            </Button>
+          </div>
 
-          <Button type="submit" variant="outline-primary">
-            Adicionar
-          </Button>
-        </form>
+          <div className="d-flex justify-content-start flex-column mt-2 ">
+            <span>Feitos: {status.completed} </span>
+            <span> Remanecentes: {status.remaining}</span>
+          </div>
+
+          <div className="d-flex justify-content-start mt-4">
+            <ul>
+              {journeyStore.journeys.map((journey, index) => {
+                return (
+                  <li
+                    onClick={() => {
+                      journeyStore.setCompleted(journey.id);
+                    }}
+                    key={index}
+                  >
+                    [ {journey.completed ? 'x' : '\xa0\xa0'} ]{journey.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <span>Feitos: {status.completed} </span>
-        <br />
-        <span> Remanecentes: {status.remaining}</span>
-      </div>
-
-      <div>
-        <ul>
-          {journeyStore.journeys.map((journey, index) => {
-            return (
-              <li
-                onClick={() => {
-                  journeyStore.setCompleted(journey.id);
-                }}
-                key={index}
-              >
-                [ {journey.completed ? 'x' : ' '} ]{journey.name}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
+      <Modal size="lg" show={showModal} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Nova Jornada</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Body>
+            <Row>
+              <Col>
+                <Form.Label>Tipo</Form.Label>
+                <Form.Control as="select" aria-label="tipo">
+                  <option>-</option>
+                  <option>Descanso</option>
+                  <option>Espera</option>
+                  <option>Refeição</option>
+                  <option>Pernoite</option>
+                </Form.Control>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Form.Label>Início</Form.Label>
+                <Form.Control
+                  type="datetime-local"
+                  aria-label="inicio"
+                  value={value}
+                  onChange={handleChange}
+                />
+              </Col>
+              <Col>
+                <Form.Label>Fim</Form.Label>
+                <Form.Control type="datetime-local" aria-label="Tarefa" />
+              </Col>
+            </Row>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Fechar
+            </Button>
+            <Button variant="primary" type="submit" onClick={handleClose}>
+              Salvar Jornada
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+    </>
   );
 });
 
