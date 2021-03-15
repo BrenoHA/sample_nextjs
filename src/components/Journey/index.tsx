@@ -1,5 +1,5 @@
-import { SyntheticEvent, ChangeEvent, useState } from 'react';
-import { Button, Modal, Row, Col, Form, Card } from 'react-bootstrap';
+import { useState } from 'react';
+import { Button, Modal, Card } from 'react-bootstrap';
 import styles from './styles.module.scss';
 import { JourneyStoreClass } from '@app/stores/JourneyStore';
 import { observer } from 'mobx-react';
@@ -7,6 +7,19 @@ import ModalJourneyComponent from './Modal';
 
 type JourneyListProps = {
   journeyStore: JourneyStoreClass;
+};
+
+const formatDate = (date: string) => {
+  const d = new Date(date);
+  const date_formated = d.toLocaleTimeString([], {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  return date_formated;
 };
 
 const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
@@ -55,9 +68,9 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
                   </Card.Header>
                   <Card.Body>
                     <Card.Text>
-                      Início: {journey.startTime}
+                      Início: {formatDate(journey.startTime)}
                       <br />
-                      Fim: {journey.endTime}
+                      Fim: {formatDate(journey.endTime)}
                     </Card.Text>
                   </Card.Body>
                 </Card>
