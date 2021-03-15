@@ -1,5 +1,7 @@
 export interface IJourney {
   id: number;
-  name: string;
+  type: string;
+  startTime: string;
+  endTime: string;
   completed: boolean;
 }
