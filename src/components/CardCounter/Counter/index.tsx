@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import styles from './styles.module.scss';
 
-const AddButton = () => {
+const CounterComponent = () => {
   const [count, setCount] = useState(0);
   const [isActivate, setIsActivate] = useState(false);
 
@@ -32,7 +32,7 @@ const AddButton = () => {
 
   return (
     <div className={styles.container}>
-      <span className={styles.temporizador}>Temporizador</span>
+      <span className={styles.contador}>Cronômetro</span>
       <div className={styles.time}>
         <span> {getTime()} </span>
       </div>
@@ -51,4 +51,4 @@ const AddButton = () => {
   );
 };
 
-export default AddButton;
+export default CounterComponent;

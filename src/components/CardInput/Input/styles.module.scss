@@ -1,4 +1,4 @@
-@import '../../styles/mixins';
+@import '@app/styles/mixins';
 
 .container {
   @include mx_flex_center_column;
@@ -6,6 +6,7 @@
 }
 .container img {
   height: 70px;
+  border-radius: 50px;
 }
 
 .label {

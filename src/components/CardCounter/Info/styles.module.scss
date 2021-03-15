@@ -1,0 +1,15 @@
+@import '@app/styles/mixins';
+
+.info {
+  @include mx_flex_center_column;
+}
+
+.name {
+  @include mx_flex_center_column;
+  font-size: 1rem;
+}
+
+.info img {
+  height: 70px;
+  border-radius: 50px;
+}
