@@ -17,7 +17,6 @@ const HomePage = () => {
     if (username != '') {
       const getUser = async () => {
         const res = await fetch(`https://api.github.com/users/${username}`);
-
         const user: IUser = await res.json();
 
         if (user) {
@@ -28,8 +27,6 @@ const HomePage = () => {
       getUser();
     }
   }, [username]);
-
-  console.log(user.name);
 
   return (
     <>
