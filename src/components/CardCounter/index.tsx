@@ -14,8 +14,6 @@ type Props = {
 };
 
 const CardCounterComponent = ({ setIsCounter, user }: Props) => {
-  console.log(user);
-
   return (
     <div className={styles.center}>
       <Card style={{ width: '20rem' }}>

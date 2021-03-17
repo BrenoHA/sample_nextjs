@@ -12,8 +12,10 @@ const InputComponent = ({ setIsCounter, setUsername }: Props) => {
 
   const handleSubmit = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    setIsCounter(true);
-    setUsername(tempUsername);
+    if (tempUsername.length > 0) {
+      setIsCounter(true);
+      setUsername(tempUsername);
+    }
   };
 
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +38,7 @@ const InputComponent = ({ setIsCounter, setUsername }: Props) => {
             placeholder="Username"
             aria-label="Username"
             aria-describedby="basic-addon1"
+            required
           />
         </InputGroup>
 

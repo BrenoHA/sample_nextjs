@@ -27,8 +27,12 @@ const getDurationTime = (startTime: string, endTime: string) => {
   const formated_endTime = +new Date(endTime);
   const duration_ms = formated_endTime - formated_startTime;
 
-  const date_duration_ms = new Date(duration_ms);
-  const duration_time = `${date_duration_ms.getHours()}h ${date_duration_ms.getMinutes()}min`;
+  const time = duration_ms / 1000,
+    hours = Math.floor(time / 60 / 60),
+    minutes = Math.floor(time / 60) % 60;
+
+  const duration_time = `${hours}h ${minutes}min`;
+
   return duration_time;
 };
 
