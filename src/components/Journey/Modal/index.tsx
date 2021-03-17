@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
-import { Button, Modal, Row, Col, Form, Card } from 'react-bootstrap';
+import { Button, Modal, Row, Col, Form, InputGroup } from 'react-bootstrap';
 
 import { JourneyStoreClass } from '@app/stores/JourneyStore';
 
@@ -12,17 +12,33 @@ const ModalJourneyComponent = ({
   journeyStore,
   setShowModal,
 }: JourneyListProps) => {
-  const [type, setType] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [type, setType] = useState<string>('');
+  const [startTime, setStartTime] = useState<string>('');
+  const [endTime, setEndTime] = useState<string>('');
+  const [showDateError, setShowDateError] = useState<boolean>(false);
+
+  const validateDate = (startTime: string, endTime: string) => {
+    const formated_startTime = new Date(startTime);
+    const formated_endTime = new Date(endTime);
+
+    const isAfter = formated_endTime > formated_startTime;
+
+    const isValid = isAfter;
+
+    return isValid;
+  };
+
   const handleClose = () => {
     setShowModal(false);
   };
 
   const handleSubmit = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    if (startTime) {
+    if (validateDate(startTime, endTime)) {
       journeyStore.addJourney(type, startTime, endTime);
+      handleClose();
+    } else {
+      setShowDateError(true);
     }
   };
 
@@ -57,7 +73,7 @@ const ModalJourneyComponent = ({
               <Form.Control
                 type="datetime-local"
                 aria-label="StartTime"
-                value={startTime}
+                required
                 onChange={(ev) => {
                   setStartTime(ev.target.value);
                 }}
@@ -68,10 +84,15 @@ const ModalJourneyComponent = ({
               <Form.Control
                 type="datetime-local"
                 aria-label="EndTime"
+                required
+                isInvalid={showDateError}
                 onChange={(ev) => {
                   setEndTime(ev.target.value);
                 }}
               />
+              <Form.Control.Feedback type="invalid">
+                O Fim deve ser depois do Início.
+              </Form.Control.Feedback>
             </Col>
           </Row>
         </Modal.Body>
@@ -79,7 +100,7 @@ const ModalJourneyComponent = ({
           <Button variant="secondary" onClick={handleClose}>
             Fechar
           </Button>
-          <Button variant="primary" type="submit" onClick={handleClose}>
+          <Button variant="primary" type="submit">
             Salvar Evento
           </Button>
         </Modal.Footer>
