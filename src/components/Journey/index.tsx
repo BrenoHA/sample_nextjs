@@ -50,7 +50,7 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
           <Button
             onClick={handleShow}
             variant="outline-primary"
-            className="mt-2"
+            className="my-2"
           >
             Adicionar
           </Button>
@@ -63,8 +63,8 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
           <span>Feitos: {status.completed} </span>
           <span> Remanecentes: {status.remaining}</span>
         </div>
-        <div className="d-flex justify-content-start mt-4 ">
-          <div>
+        <div className="d-flex justify-content-start mt-3 mb-4 ">
+          <div className="mb-5">
             {journeyStore.journeys.map((journey, index) => {
               return (
                 <Card
