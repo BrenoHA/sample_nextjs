@@ -9,7 +9,10 @@ const NavBarComponent = () => {
 
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto"></Nav>
-        <Nav>
+        <Nav className="mr-4">
+          <Nav.Link href="/" className="mr-2">
+            Início
+          </Nav.Link>
           <Nav.Link href="/journey">Jornada</Nav.Link>
         </Nav>
       </Navbar.Collapse>
