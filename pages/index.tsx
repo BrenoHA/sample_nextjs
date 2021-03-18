@@ -1,6 +1,5 @@
 import CardCounterComponent from '@app/components/CardCounter';
 import CardInputComponent from '@app/components/CardInput';
-import NavBarComponent from '@app/components/NavBar';
 import { useEffect, useState } from 'react';
 
 type IUser = {
@@ -30,7 +29,6 @@ const HomePage = () => {
 
   return (
     <>
-      <NavBarComponent />
       {isCounter ? (
         <CardCounterComponent setIsCounter={setIsCounter} user={user} />
       ) : (
