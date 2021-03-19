@@ -5,12 +5,17 @@ import { useEffect, useState } from 'react';
 type IUser = {
   name: string;
   avatar_url: string;
+  html_url: string;
 };
 
 const HomePage = () => {
   const [isInfo, setIsInfo] = useState<boolean>(false);
   const [username, setUsername] = useState<string>('');
-  const [user, setUser] = useState<IUser>({ name: '', avatar_url: '' });
+  const [user, setUser] = useState<IUser>({
+    name: '',
+    avatar_url: '',
+    html_url: '',
+  });
 
   useEffect(() => {
     if (username != '') {

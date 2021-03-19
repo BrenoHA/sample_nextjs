@@ -1,6 +1,6 @@
 import { FiArrowLeft } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 import { IUser } from '@app/interfaces/user';
 
@@ -37,25 +37,26 @@ const CardInfoComponent = ({ setIsInfo, user }: Props) => {
           />
           <Card.Body>
             {/* <InfoComponent name={user.name} avatar_url={user.avatar_url} /> */}
-            <div>
-              <motion.div
-                whileHover={{
-                  position: 'relative',
-                  zIndex: 1,
-                  scale: 1.5,
-                }}
-              >
-                <img
-                  className={styles.avatar}
-                  src={user.avatar_url}
-                  alt="Foto Perfil"
-                />
-              </motion.div>
-              <Card.Title>
-                Hello <strong>{user.name}</strong>
-              </Card.Title>
-              <Card.Text>Seja bem vindo!</Card.Text>
-            </div>
+            <motion.div
+              whileHover={{
+                position: 'relative',
+                zIndex: 1,
+                scale: 1.5,
+              }}
+            >
+              <img
+                className={styles.avatar}
+                src={user.avatar_url}
+                alt="Foto Perfil"
+              />
+            </motion.div>
+            <Card.Title>
+              Hello <strong>{user.name}</strong>
+            </Card.Title>
+            <Card.Text>Seja bem vindo!</Card.Text>
+            <Button variant="primary" target="_blank" href={user.html_url}>
+              GitHub
+            </Button>
           </Card.Body>
         </Card>
       </div>
