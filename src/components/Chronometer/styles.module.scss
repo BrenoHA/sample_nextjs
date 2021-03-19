@@ -2,6 +2,7 @@
 
 .container {
   @include mx_flex_center;
+  height: 80vh;
   display: flex;
   flex-direction: column;
 }
