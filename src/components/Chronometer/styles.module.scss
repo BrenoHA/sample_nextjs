@@ -2,9 +2,7 @@
 
 .container {
   @include mx_flex_center;
-}
-
-.container {
+  height: 80vh;
   display: flex;
   flex-direction: column;
 }
