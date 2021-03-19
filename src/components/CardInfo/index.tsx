@@ -3,17 +3,16 @@ import { motion } from 'framer-motion';
 import { Card } from 'react-bootstrap';
 
 import InfoComponent from './Info';
-import CounterComponent from './Counter';
 import { IUser } from '@app/interfaces/user';
 
 import styles from './styles.module.scss';
 
 type Props = {
-  setIsCounter: (isCounter: boolean) => void;
+  setIsInfo: (isInfo: boolean) => void;
   user: IUser;
 };
 
-const CardCounterComponent = ({ setIsCounter, user }: Props) => {
+const CardInfoComponent = ({ setIsInfo, user }: Props) => {
   return (
     <motion.div
       initial="pageInitial"
@@ -35,11 +34,10 @@ const CardCounterComponent = ({ setIsCounter, user }: Props) => {
           <FiArrowLeft
             size="25"
             className={styles.link}
-            onClick={() => setIsCounter(false)}
+            onClick={() => setIsInfo(false)}
           />
           <Card.Body>
             <InfoComponent name={user.name} avatar_url={user.avatar_url} />
-            <CounterComponent />
           </Card.Body>
         </Card>
       </div>
@@ -47,4 +45,4 @@ const CardCounterComponent = ({ setIsCounter, user }: Props) => {
   );
 };
 
-export default CardCounterComponent;
+export default CardInfoComponent;

@@ -3,17 +3,17 @@ import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import React, { SyntheticEvent, ChangeEvent, useState } from 'react';
 
 type Props = {
-  setIsCounter: (isCounter: boolean) => void;
+  setIsInfo: (isCounter: boolean) => void;
   setUsername: (username: string) => void;
 };
 
-const InputComponent = ({ setIsCounter, setUsername }: Props) => {
+const InputComponent = ({ setIsInfo, setUsername }: Props) => {
   const [tempUsername, setTempUsername] = useState<string>('');
 
   const handleSubmit = (ev: SyntheticEvent) => {
     ev.preventDefault();
     if (tempUsername.length > 0) {
-      setIsCounter(true);
+      setIsInfo(true);
       setUsername(tempUsername);
     }
   };
