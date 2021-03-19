@@ -1,10 +1,12 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Button, Modal, Card, ListGroup } from 'react-bootstrap';
-import styles from './styles.module.scss';
-import { JourneyStoreClass } from '@app/stores/JourneyStore';
 import { observer } from 'mobx-react';
+import { Button, Modal, Card, ListGroup } from 'react-bootstrap';
+
+import { JourneyStoreClass } from '@app/stores/JourneyStore';
 import ModalJourneyComponent from './Modal';
 
+import styles from './styles.module.scss';
 type JourneyListProps = {
   journeyStore: JourneyStoreClass;
 };
@@ -43,7 +45,21 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
   const status = journeyStore.status;
 
   return (
-    <>
+    <motion.div
+      initial="pageInitial"
+      animate="pageVisible"
+      transition={{ duration: 0.5 }}
+      variants={{
+        pageInitial: {
+          opacity: 0,
+          scale: 0,
+        },
+        pageVisible: {
+          scale: 1,
+          opacity: 1,
+        },
+      }}
+    >
       <div className={styles.center}>
         <div className={styles.container}>
           <span>Adicione um Evento</span>
@@ -102,7 +118,7 @@ const JourneyComponent = observer(({ journeyStore }: JourneyListProps) => {
           </div>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 });
 export default JourneyComponent;

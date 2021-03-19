@@ -1,4 +1,5 @@
 import { Navbar, Nav } from 'react-bootstrap';
+import Link from 'next/link';
 
 const NavBarComponent = () => {
   return (
@@ -10,10 +11,12 @@ const NavBarComponent = () => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto"></Nav>
         <Nav className="mr-4">
-          <Nav.Link href="/" className="mr-2">
-            Início
-          </Nav.Link>
-          <Nav.Link href="/journey">Jornada</Nav.Link>
+          <Link href="/" passHref>
+            <Nav.Link className="mr-2">Início</Nav.Link>
+          </Link>
+          <Link href="/journey" passHref>
+            <Nav.Link>Jornada</Nav.Link>
+          </Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
