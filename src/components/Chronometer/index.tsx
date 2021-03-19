@@ -1,5 +1,7 @@
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+
 import styles from './styles.module.scss';
 
 const ChronometerComponent = () => {
@@ -31,23 +33,39 @@ const ChronometerComponent = () => {
   }, [count, isActivate]);
 
   return (
-    <div className={styles.container}>
-      <span className={styles.contador}>Cronômetro</span>
-      <div className={styles.time}>
-        <span> {getTime()} </span>
-      </div>
+    <motion.div
+      initial="pageInitial"
+      animate="pageVisible"
+      transition={{ duration: 0.5 }}
+      variants={{
+        pageInitial: {
+          opacity: 0,
+          scale: 0,
+        },
+        pageVisible: {
+          scale: 1,
+          opacity: 1,
+        },
+      }}
+    >
+      <div className={styles.container}>
+        <span className={styles.contador}>Cronômetro</span>
+        <div className={styles.time}>
+          <span> {getTime()} </span>
+        </div>
 
-      <div>
-        <Button variant="primary" onClick={() => setIsActivate(!isActivate)}>
-          {isActivate ? 'Pausar' : 'Iniciar'}
-        </Button>
-        {count > 0 && !isActivate && (
-          <Button variant="sencodary" onClick={reset}>
-            Resetar
+        <div>
+          <Button variant="primary" onClick={() => setIsActivate(!isActivate)}>
+            {isActivate ? 'Pausar' : 'Iniciar'}
           </Button>
-        )}
+          {count > 0 && !isActivate && (
+            <Button variant="sencodary" onClick={reset}>
+              Resetar
+            </Button>
+          )}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
