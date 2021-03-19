@@ -1,16 +1,21 @@
-import CardCounterComponent from '@app/components/CardCounter';
+import CardInfoComponent from '@app/components/CardInfo';
 import CardInputComponent from '@app/components/CardInput';
 import { useEffect, useState } from 'react';
 
 type IUser = {
   name: string;
   avatar_url: string;
+  html_url: string;
 };
 
 const HomePage = () => {
-  const [isCounter, setIsCounter] = useState<boolean>(false);
+  const [isInfo, setIsInfo] = useState<boolean>(false);
   const [username, setUsername] = useState<string>('');
-  const [user, setUser] = useState<IUser>({ name: '', avatar_url: '' });
+  const [user, setUser] = useState<IUser>({
+    name: '',
+    avatar_url: '',
+    html_url: '',
+  });
 
   useEffect(() => {
     if (username != '') {
@@ -29,13 +34,10 @@ const HomePage = () => {
 
   return (
     <>
-      {isCounter ? (
-        <CardCounterComponent setIsCounter={setIsCounter} user={user} />
+      {isInfo ? (
+        <CardInfoComponent setIsInfo={setIsInfo} user={user} />
       ) : (
-        <CardInputComponent
-          setIsCounter={setIsCounter}
-          setUsername={setUsername}
-        />
+        <CardInputComponent setIsInfo={setIsInfo} setUsername={setUsername} />
       )}
     </>
   );
