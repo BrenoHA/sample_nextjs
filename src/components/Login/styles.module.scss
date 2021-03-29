@@ -1,0 +1,11 @@
+@import '@app/styles/mixins';
+
+.container {
+  margin-top: 200px;
+  @include mx_flex_center_column;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 500;
+}
