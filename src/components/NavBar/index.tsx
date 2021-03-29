@@ -1,4 +1,4 @@
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 import Link from 'next/link';
 
 const NavBarComponent = () => {
@@ -19,7 +19,10 @@ const NavBarComponent = () => {
             <Nav.Link className="mr-2">Cronometro</Nav.Link>
           </Link>
           <Link href="/journey" passHref>
-            <Nav.Link>Jornada</Nav.Link>
+            <Nav.Link className="mr-4">Jornada</Nav.Link>
+          </Link>
+          <Link href="/login" passHref>
+            <Button variant="outline-secondary">Login</Button>
           </Link>
         </Nav>
       </Navbar.Collapse>
