@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "date-fns": "^2.19.0",
     "framer-motion": "^4.0.0",
