@@ -18,8 +18,10 @@ const HomePage = () => {
     avatar_url: '',
     html_url: '',
   });
+  const [isUserInvalid, setIsUserInvalid] = useState<boolean>(false);
 
   const userNotFound = () => {
+    setIsUserInvalid(true);
     console.log('error');
   };
 
@@ -51,7 +53,11 @@ const HomePage = () => {
       {isInfo ? (
         <CardInfoComponent setIsInfo={setIsInfo} user={user} />
       ) : (
-        <CardInputComponent setIsInfo={setIsInfo} setUsername={setUsername} />
+        <CardInputComponent
+          setIsInfo={setIsInfo}
+          setUsername={setUsername}
+          isUserInvalid={isUserInvalid}
+        />
       )}
     </>
   );
