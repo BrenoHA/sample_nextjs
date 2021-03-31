@@ -8,9 +8,14 @@ import styles from './styles.module.scss';
 type Props = {
   setIsInfo: (isInfo: boolean) => void;
   setUsername: (username: string) => void;
+  isUserInvalid: boolean;
 };
 
-const CardInputComponent = ({ setIsInfo, setUsername }: Props) => {
+const CardInputComponent = ({
+  setIsInfo,
+  setUsername,
+  isUserInvalid,
+}: Props) => {
   return (
     <motion.div
       initial="pageInitial"
@@ -29,7 +34,11 @@ const CardInputComponent = ({ setIsInfo, setUsername }: Props) => {
     >
       <div className={styles.center}>
         <Card style={{ width: '20rem' }}>
-          <InputComponent setIsInfo={setIsInfo} setUsername={setUsername} />
+          <InputComponent
+            setIsInfo={setIsInfo}
+            setUsername={setUsername}
+            isUserInvalid={isUserInvalid}
+          />
         </Card>
       </div>
     </motion.div>

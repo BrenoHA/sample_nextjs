@@ -5,9 +5,10 @@ import React, { SyntheticEvent, ChangeEvent, useState } from 'react';
 type Props = {
   setIsInfo: (isCounter: boolean) => void;
   setUsername: (username: string) => void;
+  isUserInvalid: boolean;
 };
 
-const InputComponent = ({ setIsInfo, setUsername }: Props) => {
+const InputComponent = ({ setIsInfo, setUsername, isUserInvalid }: Props) => {
   const [tempUsername, setTempUsername] = useState<string>('');
 
   const handleSubmit = (ev: SyntheticEvent) => {
@@ -39,7 +40,11 @@ const InputComponent = ({ setIsInfo, setUsername }: Props) => {
             aria-label="Username"
             aria-describedby="basic-addon1"
             required
+            isInvalid={isUserInvalid}
           />
+          <FormControl.Feedback type="invalid">
+            Usuário não encontrado
+          </FormControl.Feedback>
         </InputGroup>
 
         <Button type="submit" variant="outline-primary">

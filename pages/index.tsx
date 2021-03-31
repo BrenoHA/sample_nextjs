@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import CardInfoComponent from '@app/components/CardInfo';
 import CardInputComponent from '@app/components/CardInput';
-import { useEffect, useState } from 'react';
 
 type IUser = {
   name: string;
@@ -16,16 +18,30 @@ const HomePage = () => {
     avatar_url: '',
     html_url: '',
   });
+  const [isUserInvalid, setIsUserInvalid] = useState<boolean>(false);
+
+  const userNotFound = () => {
+    setIsUserInvalid(true);
+    console.log('error');
+  };
 
   useEffect(() => {
     if (username != '') {
       const getUser = async () => {
-        const res = await fetch(`https://api.github.com/users/${username}`);
-        const user: IUser = await res.json();
+        axios
+          .get(`https://api.github.com/users/${username}`)
+          .then((response) => {
+            const user: IUser = response.data;
 
-        if (user) {
-          setUser(user);
-        }
+            if (response.status == 200) {
+              setUser(user);
+            } else {
+            }
+          })
+          .catch(() => {
+            userNotFound();
+            setIsInfo(false);
+          });
       };
 
       getUser();
@@ -37,7 +53,11 @@ const HomePage = () => {
       {isInfo ? (
         <CardInfoComponent setIsInfo={setIsInfo} user={user} />
       ) : (
-        <CardInputComponent setIsInfo={setIsInfo} setUsername={setUsername} />
+        <CardInputComponent
+          setIsInfo={setIsInfo}
+          setUsername={setUsername}
+          isUserInvalid={isUserInvalid}
+        />
       )}
     </>
   );
