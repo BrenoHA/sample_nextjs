@@ -2,13 +2,18 @@ import { Button } from 'react-bootstrap';
 import styles from './styles.module.scss';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import pdfDoc from './pdfDoc';
+import pdfDoc from '../../utils/pdfDoc';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const PdfPageComponent = () => {
+  const buildPdf = () => {
+    //map passing name, journeys[] {title, start, final, observation }
+  };
+
   const handleShowPdf = () => {
-    pdfMake.createPdf(pdfDoc).open({}, window);
+    // Calls built pdf
+    pdfMake.createPdf(pdfDoc).open({}, window.open('', '_blank'));
   };
 
   return (
