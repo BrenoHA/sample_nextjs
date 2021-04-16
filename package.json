@@ -18,6 +18,7 @@
     "mobx": "^6.1.8",
     "mobx-react": "^7.1.0",
     "next": "^10.0.7",
+    "pdfmake": "^0.1.71",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.1",
     "react-dom": "^17.0.1",

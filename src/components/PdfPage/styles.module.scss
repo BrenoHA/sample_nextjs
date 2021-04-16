@@ -1,0 +1,6 @@
+@import '@app/styles/mixins';
+
+.container {
+  @include mx_flex_center;
+  height: 80vh;
+}
